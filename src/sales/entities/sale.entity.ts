@@ -31,7 +31,7 @@ export class Sale {
   @Column({ nullable: true })
   userId: number;
 
-  @Column({ type: 'enum', enum: SaleStatus, default: SaleStatus.PENDING })
+  @Column({ type: 'enum', enum: SaleStatus, nullable: true })
   status: SaleStatus;
 
   @Column({ type: 'decimal', precision: 10, scale: 2, default: 0 })

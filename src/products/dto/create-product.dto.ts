@@ -25,4 +25,38 @@ export class CreateProductDto {
   @IsNumber()
   @Min(0)
   quantity: number;
+
+  @IsNumber()
+  @IsOptional()
+  categoryId?: number;
+
+  @IsNumber()
+  @IsOptional()
+  supplierId?: number;
+
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  minQuantity?: number;
+
+  @IsNumber()
+  @Min(0)
+  @IsOptional()
+  maxQuantity?: number;
+
+  @IsString()
+  @IsOptional()
+  sku?: string;
+
+  @IsString()
+  @IsOptional()
+  barcode?: string;
+
+  @IsString()
+  @IsOptional()
+  location?: string;
+
+  @IsBoolean()
+  @IsOptional()
+  isActive?: boolean;
 }

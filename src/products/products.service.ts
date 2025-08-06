@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, ConflictException } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -11,17 +11,35 @@ export class ProductsService {
     @InjectRepository(Product)
     private readonly productRepository: Repository<Product>,
   ) {}
+
   async create(createProductDto: CreateProductDto) {
+    // Check if product with same name already exists
+    const existingProduct = await this.productRepository.findOne({
+      where: { name: createProductDto.name },
+    });
+
+    if (existingProduct) {
+      throw new ConflictException(
+        `Product with name "${createProductDto.name}" already exists`,
+      );
+    }
+
     const product = this.productRepository.create(createProductDto);
     return await this.productRepository.save(product);
   }
 
   async findAll() {
-    return await this.productRepository.find();
+    return await this.productRepository.find({
+      relations: ['category', 'supplier'],
+      order: { name: 'ASC' }
+    });
   }
 
   async findOne(id: number) {
-    return await this.productRepository.findOne({ where: { id } });
+    return await this.productRepository.findOne({ 
+      where: { id },
+      relations: ['category', 'supplier']
+    });
   }
 
   async update(id: number, updateProductDto: UpdateProductDto) {
@@ -29,6 +47,20 @@ export class ProductsService {
     if (!product) {
       throw new Error(`Product with id ${id} not found`);
     }
+
+    // Check if updating name and if it conflicts with another product
+    if (updateProductDto.name && updateProductDto.name !== product.name) {
+      const existingProduct = await this.productRepository.findOne({
+        where: { name: updateProductDto.name },
+      });
+
+      if (existingProduct) {
+        throw new ConflictException(
+          `Product with name "${updateProductDto.name}" already exists`,
+        );
+      }
+    }
+
     Object.assign(product, updateProductDto);
     return await this.productRepository.save(product);
   }
