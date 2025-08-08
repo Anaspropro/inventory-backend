@@ -17,11 +17,7 @@ import { Report } from '../reports/entities/report.entity';
     ConfigModule.forRoot(), // Loads .env automatically
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT || '5432'),
-      username: process.env.DB_USERNAME || 'webwiz',
-      password: process.env.DB_PASSWORD || 'Web$wiZ',
-      database: process.env.DB_NAME || 'inventory_db',
+      url: process.env.DATABASE_URL,
       entities: [
         Product,
         User,
@@ -35,6 +31,9 @@ import { Report } from '../reports/entities/report.entity';
         Report,
       ],
       synchronize: true,
+      ssl: {
+        rejectUnauthorized: false,
+      },
     }),
   ],
 })
