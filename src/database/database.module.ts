@@ -11,7 +11,9 @@ import { Sale } from '../sales/entities/sale.entity';
 import { SaleItem } from '../sales/entities/sale-item.entity';
 import { InventoryMovement } from '../inventory/entities/inventory-movement.entity';
 import { Report } from '../reports/entities/report.entity';
+import * as dotenv from 'dotenv';
 
+dotenv.config();
 @Module({
   imports: [
     ConfigModule.forRoot(), // Loads .env automatically
