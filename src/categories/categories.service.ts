@@ -4,13 +4,16 @@ import { Repository } from 'typeorm';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
 import { Category } from './entities/category.entity';
+import { CrudService } from '@dataui/crud';
 
 @Injectable()
-export class CategoriesService {
+export class CategoriesService extends CrudService<Category> {
   constructor(
     @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>,
-  ) {}
+    readonly categoryRepository: Repository<Category>,
+  ) {
+    super(categoryRepository);
+  }
 
   async create(createCategoryDto: CreateCategoryDto) {
     // Check if category with same name already exists
@@ -80,4 +83,37 @@ export class CategoriesService {
 
     return await this.categoryRepository.remove(category);
   }
+
+    // Implementing missing methods from CrudService
+    async getMany(req: any): Promise<any> {
+      return;
+    }
+  
+    async getOne(req: any): Promise<any> {
+      return;
+    }
+  
+    async createOne(req: any, dto: any): Promise<any> {
+      return;
+    }
+  
+    async createMany(req: any, dto: any): Promise<any> {
+      return;
+    }
+  
+    async updateOne(req: any, dto: any): Promise<any> {
+      return;
+    }
+  
+    async replaceOne(req: any, dto: any): Promise<any> {
+      return;
+    }
+  
+    async deleteOne(req: any): Promise<any> {
+      return;
+    }
+  
+    async recoverOne(req: any): Promise<any> {
+      return;
+    }
 }

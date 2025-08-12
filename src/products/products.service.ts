@@ -31,14 +31,14 @@ export class ProductsService {
   async findAll() {
     return await this.productRepository.find({
       relations: ['category', 'supplier'],
-      order: { name: 'ASC' }
+      order: { name: 'ASC' },
     });
   }
 
   async findOne(id: number) {
-    return await this.productRepository.findOne({ 
+    return await this.productRepository.findOne({
       where: { id },
-      relations: ['category', 'supplier']
+      relations: ['category', 'supplier'],
     });
   }
 
