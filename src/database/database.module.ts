@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { Product } from '../entities/product.entity';
-import { Sale } from '../../sales/entities/sale.entity';
-import { Category } from '../../categories/entities/category.entity';
+import { Product } from '../products/entities/product.entity';
+import { Sale } from '../sales/entities/sale.entity';
+import { Category } from '../categories/entities/category.entity';
 // import { User } from '../users/entities/user.entity';
 // import { Supplier } from '../suppliers/entities/supplier.entity';
 // import { Order } from '../orders/entities/order.entity';

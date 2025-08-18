@@ -1,6 +1,6 @@
 // backend/src/database/data-source.ts
 import { DataSource } from 'typeorm';
-import { Product } from '../entities/product.entity';
+import { Product } from '../products/entities/product.entity';
 // import { User } from '../users/entities/user.entity';
 // import { Category } from '../categories/entities/category.entity';
 // import { Supplier } from '../suppliers/entities/supplier.entity';
