@@ -14,7 +14,7 @@ dotenv.config();
       type: 'postgres',
       url: process.env.DATABASE_URL,
       entities: [Product, Sale, Category],
-      synchronize: false,
+      synchronize: true,
       ssl: {
         rejectUnauthorized: false,
       },

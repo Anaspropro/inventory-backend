@@ -10,7 +10,7 @@ export const AppDataSource = new DataSource({
   type: 'postgres',
   url: process.env.DATABASE_URL,
   entities: [Product, Category, Sale],
-  synchronize: false, // Don't use in production
+  synchronize: true, // Don't use in production
   logging: true,
   ssl: {
     rejectUnauthorized: false,
